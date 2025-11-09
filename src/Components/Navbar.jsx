@@ -8,7 +8,7 @@ const Navbar = () => {
 const authInfo = use(AuthContext);
 console.log(authInfo);
 
-const [user, setUser] = useState(true)
+const [user, setUser] = useState(false)
 // setUser(true)
 
   const navLinks = (
@@ -108,7 +108,7 @@ const [user, setUser] = useState(true)
 
             <ul
               tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              className="mt-3 z-1 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
             >
               <li>
                 <NavLink to="/add-food">Add Food</NavLink>
