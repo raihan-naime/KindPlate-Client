@@ -2,42 +2,44 @@ import React from "react";
 import { Link } from "react-router";
 
 const FeaturedFoodCard = ({ food }) => {
-  const { _id, food_name, food_image, donator_name, food_status } = food;
+
+  const handleViewDetails = () =>{
+    console.log('clicked view details btn');
+    
+  }
 
   return (
-    <div className="card bg-base-100 shadow-lg hover:shadow-2xl transition duration-300 rounded-2xl overflow-hidden">
-      {/* Food Image */}
-      <figure className="h-48 w-full overflow-hidden">
-        <img
-          src={food_image}
-          alt={food_name}
-          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-        />
-      </figure>
+    <div className=" rounded-xl shadow-md overflow-hidden bg-white hover:shadow-lg transition-shadow">
+      <img
+        src={food.food_image}
+        alt={food.food_name}
+        className="w-full h-48 object-cover"
+      />
 
-      {/* Card Content */}
-      <div className="card-body">
-        <h2 className="card-title text-lg font-semibold text-gray-800">
-          {food_name}
-        </h2>
-        <p className="text-sm text-gray-600">Donator: {donator_name}</p>
-        <p
-          className={`text-sm font-medium ${
-            food_status === "Available"
-              ? "text-green-600"
-              : "text-red-500"
-          }`}
-        >
-          Status: {food_status}
+      <div className="p-4 space-y-2">
+        <h3 className="text-lg font-semibold text-primary">{food.food_name}</h3>
+
+        <div className="flex items-center space-x-2">
+          <img
+            src={food.donator_image}
+            alt={food.donator_name}
+            className="w-8 h-8 rounded-full object-cover"
+          />
+          <p className="text-sm font-medium">{food.donator_name}</p>
+        </div>
+
+        <p className="text-sm">
+          <span className="font-medium">Quantity:</span> {food.food_quantity}
+        </p>
+        <p className="text-sm">
+          <span className="font-medium">Pickup Location:</span>{" "}
+          {food.pickup_location}
+        </p>
+        <p className="text-sm">
+          <span className="font-medium">Expire Date:</span> {food.expire_date}
         </p>
 
-        <div className="card-actions justify-end mt-2">
-          <Link to={`/food/${_id}`}>
-            <button className="btn btn-sm bg-blue-600 hover:bg-blue-700 text-white">
-              View Details
-            </button>
-          </Link>
-        </div>
+        <Link onClick={handleViewDetails} to={`/food/${food._id}`} className="btn btn-primary w-full mt-2">View Details</Link>
       </div>
     </div>
   );

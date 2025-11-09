@@ -1,28 +1,34 @@
 import { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 
 const Login = () => {
 
     const {signInUser, googleSignIn, setUser} = use(AuthContext);
-    console.log(googleSignIn);
+    const navigate = useNavigate()
+    const location = useLocation();
+    // console.log(location);
+    
     
     const handleSignIn = (e) =>{
         e.preventDefault();
         
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log({email, password});
+        // console.log({email, password});
          
         signInUser(email, password)
         .then(data => {
             setUser(data.user);
-            alert('Logged in')
+            //  location.state ? navigate(location.state) : navigate("/");
+            location.state ? navigate(location.state) : navigate('/')
+            toast.success('Logged in')
         })
         .catch(error => {
             console.log(error);
-            alert('Error')
+            toast.error('Error')
             
         })
     }
@@ -31,11 +37,12 @@ const Login = () => {
         googleSignIn()
         .then(result => {
             setUser(result.user);
-            alert('Logged In')
+            navigate('/')
+            toast.success('Logged In')
         })
         .catch(error => {
             console.log(error);
-            alert('Error')
+            toast.error('Error')
         })
     }
 

@@ -1,15 +1,21 @@
 import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
-
+import { toast } from "react-toastify";
+import { FaUserSecret } from "react-icons/fa";
 
 const Navbar = () => {
+  const { user, signOutUser } = use(AuthContext);
 
-const {user} = use(AuthContext);
-console.log(user);
-
-// const [user, setUser] = useState(false)
-// setUser(true)
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        toast.success("Log Out Successfully");
+      })
+      .catch((err) => {
+        toast.error(err);
+      });
+  };
 
   const navLinks = (
     <>
@@ -34,7 +40,6 @@ console.log(user);
         </NavLink>
       </li>
 
-      {/* Private Routes only when user is logged in */}
       {user && (
         <>
           <li>
@@ -49,7 +54,7 @@ console.log(user);
           </li>
           <li>
             <NavLink
-              to="/manage-foods"
+              to="/manage-my-foods"
               className={({ isActive }) =>
                 isActive ? "text-primary font-semibold" : ""
               }
@@ -59,7 +64,7 @@ console.log(user);
           </li>
           <li>
             <NavLink
-              to="/my-requests"
+              to="/my-food-request"
               className={({ isActive }) =>
                 isActive ? "text-primary font-semibold" : ""
               }
@@ -74,8 +79,33 @@ console.log(user);
 
   return (
     <div className="navbar bg-base-100 shadow-md px-5">
-      {/* Left side: Logo & Name */}
+      {/* Left: Logo */}
       <div className="navbar-start">
+        {/* Dropdown menu for mobile */}
+        <div className="dropdown">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {navLinks}
+          </ul>
+        </div>
         <Link
           to="/"
           className="text-2xl font-bold text-primary flex items-center gap-2"
@@ -84,12 +114,12 @@ console.log(user);
         </Link>
       </div>
 
-      {/* Center: Links */}
-      <div className="navbar-center hidden md:flex">
+      {/* Center: Links for large devices */}
+      <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
 
-      {/* Right side: Auth buttons */}
+      {/* Right: Auth */}
       <div className="navbar-end">
         {!user ? (
           <Link to="/login" className="btn btn-primary">
@@ -100,7 +130,7 @@ console.log(user);
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 border border-purple-700 rounded-full">
                 <img
-                  src={user.photoURL || "https://i.ibb.co/8xR8b6P/user.png"}
+                  src={user?.photoURL || <FaUserSecret />}
                   alt="User Avatar"
                 />
               </div>
@@ -120,8 +150,7 @@ console.log(user);
                 <NavLink to="/my-requests">My Food Requests</NavLink>
               </li>
               <li>
-                <button>Logout</button>
-                
+                <button onClick={handleSignOut}>Logout</button>
               </li>
             </ul>
           </div>

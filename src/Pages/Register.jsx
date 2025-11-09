@@ -1,9 +1,11 @@
 import { use } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
-  const { createUser, setUser } = use(AuthContext);
+  const { createUser, setUser, googleSignIn } = use(AuthContext);
+  const navigate = useNavigate();
 
   const handleCreateUser = (e) => {
     e.preventDefault();
@@ -14,26 +16,45 @@ const Register = () => {
     const password = e.target.password.value;
     // console.log({ name, photoURL, email, password });
 
+    // password validation
+    if (!/[A-Z]/.test(password)) {
+      toast.error('Password must contain at least one uppercase letter.')
+      return;
+    } else if (!/[a-z]/.test(password)) {
+      toast.error("Password must contain at least one lowercase letter.")
+      return ;
+    } else if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long.")
+      return;
+    }
+
     createUser(email, password)
       .then((user) => {
         const data = user.user;
         setUser(data);
-        alert('logged in')
+        navigate('/')
+        toast.success("logged in");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        alert('error')
+        toast.error("error");
       });
   };
 
-  //   const validatePassword = (password) => {
-  //     if (!/[A-Z]/.test(password)) return "Password must have at least one uppercase letter.";
-  //     if (!/[a-z]/.test(password)) return "Password must have at least one lowercase letter.";
-  //     if (password.length < 6) return "Password must be at least 6 characters long.";
-  //     return null;
-  //   };
+  const handleGoogleLogIn = () => {
+    googleSignIn()
+      .then((result) => {
+        setUser(result.user);
+        navigate('/')
+        toast.success("Logged In");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error");
+      });
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-5">
@@ -76,7 +97,10 @@ const Register = () => {
 
         <div className="divider">OR</div>
 
-        <button className="btn btn-outline btn-secondary w-full mb-4">
+        <button
+          onClick={handleGoogleLogIn}
+          className="btn btn-outline btn-secondary w-full mb-4"
+        >
           Register with Google
         </button>
 
