@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router";
 const Navbar = () => {
 //   const { user, logOut } = useContext(AuthContext); // user info from context
 const [user, setUser] = useState(true)
-
+// setUser(true)
 
   const navLinks = (
     <>
@@ -94,7 +94,7 @@ const [user, setUser] = useState(true)
         ) : (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
+              <div className="w-10 border border-purple-700 rounded-full">
                 <img
                   src={user.photoURL || "https://i.ibb.co/8xR8b6P/user.png"}
                   alt="User Avatar"

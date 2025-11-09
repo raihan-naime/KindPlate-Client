@@ -10,10 +10,12 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
+                loader: ()=> fetch('http://localhost:3000/featuredFoods'),
                 Component: Home
             },
             {
                 path: '/availableFoods',
+                loader: ()=> fetch('http://localhost:3000/allfoods'),
                 Component: AvailableFoods
             }
         ]
