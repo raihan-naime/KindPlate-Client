@@ -117,6 +117,7 @@ const [user, setUser] = useState(true)
               </li>
               <li>
                 <button>Logout</button>
+                {/* added */}
               </li>
             </ul>
           </div>
