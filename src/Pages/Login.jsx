@@ -1,7 +1,43 @@
+import { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 
 const Login = () => {
+
+    const {signInUser, googleSignIn, setUser} = use(AuthContext);
+    console.log(googleSignIn);
+    
+    const handleSignIn = (e) =>{
+        e.preventDefault();
+        
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        console.log({email, password});
+         
+        signInUser(email, password)
+        .then(data => {
+            setUser(data.user);
+            alert('Logged in')
+        })
+        .catch(error => {
+            console.log(error);
+            alert('Error')
+            
+        })
+    }
+
+    const handleGoogleLogIn = () =>{
+        googleSignIn()
+        .then(result => {
+            setUser(result.user);
+            alert('Logged In')
+        })
+        .catch(error => {
+            console.log(error);
+            alert('Error')
+        })
+    }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-5">
@@ -11,14 +47,14 @@ const Login = () => {
           Login to PlateShare
         </h2>
 
-        <form  className="space-y-4">
+        <form onSubmit={handleSignIn} className="space-y-4">
           <input
             type="email"
             name="email"
             placeholder="Email"
             
             className="input input-bordered w-full"
-            required
+            
           />
           <input
             type="password"
@@ -26,7 +62,7 @@ const Login = () => {
             placeholder="Password"
             
             className="input input-bordered w-full"
-            required
+            
           />
 
           <button type="submit" className="btn btn-primary w-full">
@@ -37,7 +73,7 @@ const Login = () => {
         <div className="divider">OR</div>
 
         <button
-          
+          onClick={handleGoogleLogIn}
           className="btn btn-outline btn-secondary w-full mb-4"
         >
           Login with Google

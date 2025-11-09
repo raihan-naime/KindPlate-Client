@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, { use } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 
@@ -35,7 +35,7 @@ console.log(user);
       </li>
 
       {/* Private Routes only when user is logged in */}
-      {/* {user && (
+      {user && (
         <>
           <li>
             <NavLink
@@ -68,7 +68,7 @@ console.log(user);
             </NavLink>
           </li>
         </>
-      )} */}
+      )}
     </>
   );
 
