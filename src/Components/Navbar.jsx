@@ -5,10 +5,10 @@ import { AuthContext } from "../Context/AuthContext";
 
 const Navbar = () => {
 
-const authInfo = use(AuthContext);
-console.log(authInfo);
+const {user} = use(AuthContext);
+console.log(user);
 
-const [user, setUser] = useState(false)
+// const [user, setUser] = useState(false)
 // setUser(true)
 
   const navLinks = (

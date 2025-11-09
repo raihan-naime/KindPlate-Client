@@ -1,6 +1,33 @@
+import { use } from "react";
 import { Link } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const Register = () => {
+  const { createUser, setUser } = use(AuthContext);
+
+  const handleCreateUser = (e) => {
+    e.preventDefault();
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const photoURL = e.target.photoURL.value;
+    const password = e.target.password.value;
+    // console.log({ name, photoURL, email, password });
+
+    createUser(email, password)
+      .then((user) => {
+        const data = user.user;
+        setUser(data);
+        alert('logged in')
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+        alert('error')
+      });
+  };
+
   //   const validatePassword = (password) => {
   //     if (!/[A-Z]/.test(password)) return "Password must have at least one uppercase letter.";
   //     if (!/[a-z]/.test(password)) return "Password must have at least one lowercase letter.";
@@ -15,20 +42,18 @@ const Register = () => {
           Create an Account
         </h2>
 
-        <form className="space-y-4">
+        <form onSubmit={handleCreateUser} className="space-y-4">
           <input
             type="text"
             name="name"
             placeholder="Full Name"
             className="input input-bordered w-full"
-            
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
             className="input input-bordered w-full"
-            
           />
           <input
             type="text"
@@ -41,7 +66,6 @@ const Register = () => {
             name="password"
             placeholder="Password"
             className="input input-bordered w-full"
-            
           />
           {/* {error && <p className="text-red-500 text-sm">{error}</p>} */}
 
