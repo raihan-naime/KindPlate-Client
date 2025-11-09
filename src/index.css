@@ -2,6 +2,6 @@
 @plugin "daisyui";
 
 :root{
-  font-size: 1.5em;
+  @apply text-xl md:text-2xl lg:text-3xl
   
 }

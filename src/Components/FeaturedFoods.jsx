@@ -1,5 +1,6 @@
 import React from "react";
 import FeaturedFoodCard from "./FeaturedFoodCard";
+import { Link } from "react-router";
 
 const FeaturedFoods = ({ featuredFoods }) => {
   // useEffect(()=>{
@@ -19,6 +20,9 @@ const FeaturedFoods = ({ featuredFoods }) => {
         {featuredFoods.map((food) => (
           <FeaturedFoodCard key={food._id} food={food}></FeaturedFoodCard>
         ))}
+      </div>
+      <div className="flex justify-center my-3">
+        <Link className="text-blue-700" to={'/availableFoods'}>Show All</Link>
       </div>
     </div>
   );

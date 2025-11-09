@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link, NavLink } from "react-router";
-// import { AuthContext } from "../providers/AuthProvider"; // your auth context
+import { AuthContext } from "../Context/AuthContext";
+
 
 const Navbar = () => {
-//   const { user, logOut } = useContext(AuthContext); // user info from context
+
+const authInfo = use(AuthContext);
+console.log(authInfo);
+
 const [user, setUser] = useState(true)
 // setUser(true)
 
@@ -117,7 +121,7 @@ const [user, setUser] = useState(true)
               </li>
               <li>
                 <button>Logout</button>
-                {/* added */}
+                
               </li>
             </ul>
           </div>
