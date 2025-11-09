@@ -1,0 +1,6 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root{
+  font-size: 1.5em;
+}
