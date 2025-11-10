@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 
 const RootLayout = () => {
   const navigation = useNavigation();
-  console.log(navigation);
+  // console.log(navigation);
 
   return (
     <div className="max-w-11/12 mx-auto">

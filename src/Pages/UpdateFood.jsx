@@ -6,10 +6,13 @@ import { toast } from "react-toastify";
 
 const UpdateFood = () => {
   const food = useLoaderData();
+  
   const { user } = use(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate()
 
+  console.log('food-', food);
+  
   const handleUpdateFood = (e) => {
     e.preventDefault();
     const form = e.target;
