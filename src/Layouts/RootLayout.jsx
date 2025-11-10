@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { ToastContainer } from "react-toastify";
 
+
 const RootLayout = () => {
   const navigation = useNavigation();
   // console.log(navigation);
@@ -18,6 +19,7 @@ const RootLayout = () => {
           <div className="fixed inset-0 bg-black/20 flex justify-center items-center z-50">
             <span className="loading loading-spinner loading-lg text-primary"></span>
           </div>
+          
         )}
         <Outlet></Outlet>
       </main>

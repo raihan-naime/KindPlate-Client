@@ -94,6 +94,7 @@ const MyFoodRequest = () => {
           )}
         </tbody>
       </table>
+      
     </div>
   );
 };

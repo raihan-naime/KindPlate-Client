@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import SocialLinks from "./SocialLinks";
 
 const Footer = () => {
   return (
@@ -21,41 +22,10 @@ const Footer = () => {
         </p>
 
         {/* Right: Social Media Links */}
-        <div className="flex gap-4 text-xl">
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-primary"
-          >
-            <FaFacebookF />
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-primary"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-primary"
-          >
-            <FaTwitter />
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-primary"
-          >
-            <FaLinkedinIn />
-          </a>
-        </div>
+        <SocialLinks></SocialLinks>
       </div>
+
+      
     </footer>
   );
 };

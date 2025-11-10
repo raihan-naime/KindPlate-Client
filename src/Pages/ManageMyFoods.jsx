@@ -3,6 +3,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import Loader from "../Components/Loader";
 
 const ManageMyFoods = () => {
   const { user } = use(AuthContext);
@@ -24,9 +25,10 @@ const ManageMyFoods = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[70vh]">
-        <span className="loading loading-spinner text-primary"></span>
+      <div className="h-[70vh] flex justify-center items-center">
+        <Loader></Loader>
       </div>
+      
     );
   }
   //   console.log(myFoods);
