@@ -9,6 +9,7 @@ import ManageMyFoods from "../Pages/ManageMyFoods";
 import MyFoodRequest from "../Pages/MyFoodRequest";
 import PrivateRouter from "./PrivateRouter";
 import ViewDetails from "../Pages/ViewDetails";
+import UpdateFood from "../Pages/UpdateFood";
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,12 @@ const router = createBrowserRouter([
                 path: '/food/:id',
                 loader: ({params}) => fetch(`http://localhost:3000/food/${params.id}`),
                 element: <PrivateRouter> <ViewDetails></ViewDetails> </PrivateRouter>
+            },
+            {
+                path: '/update-food/:id',
+                loader: ({params}) => fetch(`http://localhost:3000/update-food/${params.id}`),
+                element: <PrivateRouter> <UpdateFood></UpdateFood> </PrivateRouter>
+
             }
         ]
     }

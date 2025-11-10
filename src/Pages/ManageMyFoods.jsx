@@ -1,11 +1,96 @@
-import React from 'react';
+import React, { use, useEffect, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import { Link } from "react-router";
+import { toast } from "react-toastify";
 
 const ManageMyFoods = () => {
+  const { user } = use(AuthContext);
+  const [myFoods, setMyFoods] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/manage-my-foods?email=${user.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setMyFoods(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        toast.error(error);
+        setLoading(false);
+      });
+  }, [user]);
+
+  if (loading) {
     return (
-        <div>
-            ManageMyFoods
-        </div>
+      <div className="flex justify-center items-center min-h-[70vh]">
+        <span className="loading loading-spinner text-primary"></span>
+      </div>
     );
+  }
+  //   console.log(myFoods);
+
+  const handleDelete = (id) => {
+    console.log("clicked deleted btn", id);
+  };
+
+  return (
+    <div className="p-5">
+      <h2 className="text-3xl font-bold text-center mb-5 text-primary">
+        Manage My Foods
+      </h2>
+
+      {myFoods.length === 0 ? (
+        <p className="text-center text-gray-500">
+          You haven’t added any food yet.
+        </p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="table text-center w-full border">
+            <thead className="text-center">
+              <tr className="bg-base-200">
+                <th>Image</th>
+                <th>Food Name</th>
+                <th>Quantity</th>
+                <th>Pickup Location</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myFoods.map((food) => (
+                <tr key={food._id}>
+                  <td>
+                    <img
+                      src={food.food_image}
+                      alt={food.food_name}
+                      className="w-16 h-16 object-cover rounded-md"
+                    />
+                  </td>
+                  <td>{food.food_name}</td>
+                  <td>{food.food_quantity}</td>
+                  <td>{food.pickup_location}</td>
+                  <td className="flex   gap-2">
+                    <Link
+                      to={`/update-food/${food._id}`}
+                      className="btn btn-sm btn-primary"
+                    >
+                      Update
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(food._id)}
+                      className="btn btn-sm btn-error"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ManageMyFoods;

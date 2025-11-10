@@ -3,10 +3,7 @@ import { Link } from "react-router";
 
 const FeaturedFoodCard = ({ food }) => {
 
-  const handleViewDetails = () =>{
-    console.log('clicked view details btn');
-    
-  }
+
 
   return (
     <div className=" rounded-xl shadow-md overflow-hidden bg-white hover:shadow-lg transition-shadow">
@@ -39,7 +36,7 @@ const FeaturedFoodCard = ({ food }) => {
           <span className="font-medium">Expire Date:</span> {food.expire_date}
         </p>
 
-        <Link onClick={handleViewDetails} to={`/food/${food._id}`} className="btn btn-primary w-full mt-2">View Details</Link>
+        <Link to={`/food/${food._id}`} className="btn btn-primary w-full mt-2">View Details</Link>
       </div>
     </div>
   );

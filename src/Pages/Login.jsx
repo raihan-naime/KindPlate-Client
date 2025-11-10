@@ -22,7 +22,7 @@ const Login = () => {
         signInUser(email, password)
         .then(data => {
             setUser(data.user);
-            //  location.state ? navigate(location.state) : navigate("/");
+            
             location.state ? navigate(location.state) : navigate('/')
             toast.success('Logged in')
         })
@@ -37,7 +37,7 @@ const Login = () => {
         googleSignIn()
         .then(result => {
             setUser(result.user);
-            navigate('/')
+            location.state ? navigate(location.state) : navigate('/')
             toast.success('Logged In')
         })
         .catch(error => {
