@@ -10,11 +10,13 @@ import MyFoodRequest from "../Pages/MyFoodRequest";
 import PrivateRouter from "./PrivateRouter";
 import ViewDetails from "../Pages/ViewDetails";
 import UpdateFood from "../Pages/UpdateFood";
+import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
     {
         path: '/',
         Component: RootLayout,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 index: true,
