@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ManageMyFoods = () => {
   const { user } = use(AuthContext);
@@ -29,9 +30,42 @@ const ManageMyFoods = () => {
     );
   }
   //   console.log(myFoods);
+  //   /delete-food/:id
 
   const handleDelete = (id) => {
-    console.log("clicked deleted btn", id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/delete-food/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            const newFoodItems = myFoods.filter((food) => food._id !== id);
+            setMyFoods(newFoodItems);
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              title: "Error!",
+              text: "Something went wrong.",
+              icon: "error",
+            });
+          });
+      }
+    });
   };
 
   return (
