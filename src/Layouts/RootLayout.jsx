@@ -3,6 +3,7 @@ import { Outlet, useNavigation } from "react-router";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { ToastContainer } from "react-toastify";
+import Loader from "../Components/Loader";
 
 
 const RootLayout = () => {
@@ -16,9 +17,12 @@ const RootLayout = () => {
       </header>
       <main className="min-h-[80vh]">
         {navigation.state === "loading" && (
-          <div className="fixed inset-0 bg-black/20 flex justify-center items-center z-50">
-            <span className="loading loading-spinner loading-lg text-primary"></span>
-          </div>
+          // <div className="fixed inset-0 bg-black/20 flex justify-center items-center z-50">
+          //   <span className="loading loading-spinner loading-lg text-primary"></span>
+          // </div>
+          <div className="h-[70vh] flex justify-center items-center">
+                  <Loader></Loader>
+                </div>
           
         )}
         <Outlet></Outlet>
