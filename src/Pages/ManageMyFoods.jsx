@@ -72,7 +72,7 @@ const ManageMyFoods = () => {
 
   return (
     <div className="p-5">
-      <h2 className="text-3xl font-bold text-center mb-5 text-primary">
+      <h2 className="text-3xl font-bold text-center mb-5 text-[#3e3f29]">
         Manage My Foods
       </h2>
 

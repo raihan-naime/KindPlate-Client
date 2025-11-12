@@ -32,9 +32,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/add-food"
-              className={({ isActive }) =>
-                isActive ? "text-primary font-semibold" : ""
-              }
+              
             >
               Add Food
             </NavLink>
@@ -42,9 +40,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/manage-my-foods"
-              className={({ isActive }) =>
-                isActive ? "text-primary font-semibold" : ""
-              }
+              
             >
               Manage My Foods
             </NavLink>
@@ -52,9 +48,7 @@ const Navbar = () => {
           <li>
             <NavLink
               to="/my-food-request"
-              className={({ isActive }) =>
-                isActive ? "text-primary font-semibold" : ""
-              }
+              
             >
               My Food Requests
             </NavLink>
