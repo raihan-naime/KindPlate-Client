@@ -40,7 +40,7 @@ const AddFood = () => {
     })
       .then((res) => res.json)
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         e.target.reset();
 
         Swal.fire({

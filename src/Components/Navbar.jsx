@@ -122,7 +122,7 @@ const Navbar = () => {
       {/* Right: Auth */}
       <div className="navbar-end">
         {!user ? (
-          <Link to="/login" className="relative px-8 rounded-md bg-white isolation-auto z-10  border-red-700 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-full before:bg-[#A12347] before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center justify-center  py-3 text-sm font-semibold text-black  border  shadow-sm gap-x-2 hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none">
+          <Link to="/login" className="btn btn-outline">
             Login
           </Link>
         ) : (
