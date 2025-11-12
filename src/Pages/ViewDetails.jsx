@@ -8,9 +8,10 @@ const ViewDetails = () => {
   const food = useLoaderData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [request, setRequest] = useState([]);
+  const [accepted, setAccepted] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log({ user, food });
+  // console.log({ user, food });
 
   const handleFoodRequest = (e) => {
     e.preventDefault();
@@ -59,6 +60,12 @@ const ViewDetails = () => {
         setRequest(data);
       });
   }, [id]);
+
+  const handleAcceptBtn = () => {
+    console.log('clicked accepted btn');
+    
+    setAccepted(!accepted);
+  };
 
   return (
     <div>
@@ -166,72 +173,76 @@ const ViewDetails = () => {
       </div>
 
       {food.donator_email === user.email && (
-  <div className="my-8 px-2 sm:px-4 lg:px-8">
-    <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 text-center sm:text-left">
-      Food Requests
-    </h2>
+        <div className="my-8 px-2 sm:px-4 lg:px-8">
+          <h2 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 text-center sm:text-left">
+            Food Requests
+          </h2>
 
-    {request.length === 0 ? (
-      <p className="text-center sm:text-left">No requests yet.</p>
-    ) : (
-      <div className="overflow-x-auto">
-        <table className="table w-full border border-gray-300 text-sm sm:text-base">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="px-2 py-2">User</th>
-              <th className="px-2 py-2 hidden sm:table-cell">Location</th>
-              <th className="px-2 py-2 hidden md:table-cell">Reason</th>
-              <th className="px-2 py-2 hidden md:table-cell">Contact</th>
-              <th className="px-2 py-2">Status</th>
-              <th className="px-2 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {request.map((req) => (
-              <tr key={req._id} className="hover:bg-gray-50">
-                <td className="flex items-center gap-2 py-2 px-2">
-                  <img
-                    src={req.photoURL}
-                    alt=""
-                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
-                  />
-                  <span className="truncate max-w-[100px] sm:max-w-none">
-                    {req.userName}
-                  </span>
-                </td>
-                <td className="hidden sm:table-cell">{req.location}</td>
-                <td className="hidden md:table-cell">{req.reason}</td>
-                <td className="hidden md:table-cell">{req.contact}</td>
-                <td className="px-2 py-2">
-                  <span
-                    className={`px-2 py-1 rounded text-xs sm:text-sm ${
-                      req.status === "pending"
-                        ? "bg-yellow-200 text-yellow-800"
-                        : req.status === "accepted"
-                        ? "bg-green-200 text-green-800"
-                        : "bg-red-200 text-red-800"
-                    }`}
-                  >
-                    {req.status}
-                  </span>
-                </td>
-                <td className="flex flex-col sm:flex-row gap-2 px-2 py-2">
-                  <button className="btn btn-xs sm:btn-sm btn-success">
-                    Accept
-                  </button>
-                  <button className="btn btn-xs sm:btn-sm btn-error">
-                    Reject
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    )}
-  </div>
-)}
-
+          {request.length === 0 ? (
+            <p className="text-center sm:text-left">No requests yet.</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="table w-full border border-gray-300 text-sm sm:text-base">
+                <thead className="bg-gray-200">
+                  <tr>
+                    <th className="px-2 py-2">User</th>
+                    <th className="px-2 py-2 hidden sm:table-cell">Location</th>
+                    <th className="px-2 py-2 hidden md:table-cell">Reason</th>
+                    <th className="px-2 py-2 hidden md:table-cell">Contact</th>
+                    <th className="px-2 py-2">Status</th>
+                    <th className="px-2 py-2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {request.map((req) => (
+                    <tr key={req._id} className="hover:bg-gray-50">
+                      <td className="flex items-center gap-2 py-2 px-2">
+                        <img
+                          src={req.photoURL}
+                          alt=""
+                          className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover"
+                        />
+                        <span className="truncate max-w-[100px] sm:max-w-none">
+                          {req.userName}
+                        </span>
+                      </td>
+                      <td className="hidden sm:table-cell">{req.location}</td>
+                      <td className="hidden md:table-cell">{req.reason}</td>
+                      <td className="hidden md:table-cell">{req.contact}</td>
+                      <td className="px-2 py-2">
+                        <span
+                          className={`px-2 py-1 rounded text-xs sm:text-sm ${
+                            req.status === "pending"
+                              ? "bg-yellow-200 text-yellow-800"
+                              : req.status === "accepted"
+                              ? "bg-green-200 text-green-800"
+                              : "bg-red-200 text-red-800"
+                          }`}
+                        >
+                          {req.status}
+                        </span>
+                      </td>
+                      <td className="flex flex-col sm:flex-row gap-2 px-2 py-2">
+                        <button
+                          onClick={handleAcceptBtn}
+                          className="btn btn-xs sm:btn-sm btn-success"
+                        >
+                           {
+                            accepted ? "Accepted" : "Accept"
+                           }  
+                        </button>
+                        <button className="btn btn-xs sm:btn-sm btn-error">
+                          Reject
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

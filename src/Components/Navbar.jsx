@@ -40,7 +40,7 @@ const Navbar = () => {
         </NavLink>
       </li>
 
-      {user && (
+      {/* {user && (
         <>
           <li>
             <NavLink
@@ -73,7 +73,7 @@ const Navbar = () => {
             </NavLink>
           </li>
         </>
-      )}
+      )} */}
     </>
   );
 

@@ -11,7 +11,7 @@ const RootLayout = () => {
   // console.log(navigation);
 
   return (
-    <div className="max-w-11/12 mx-auto">
+    <div className="max-w-7xl mx-auto">
       <header>
         <Navbar></Navbar>
       </header>

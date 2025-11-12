@@ -1,16 +1,30 @@
-# React + Vite
+🍲 Food Share — Donate & Request Food Easily
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Site URL: https://your-live-site-url.vercel.app
 
-Currently, two official plugins are available:
+🌟 About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Food Share is a web-based platform where people can donate extra food to those in need.
+Users can request available food, and food owners can manage requests by accepting or rejecting them — helping reduce food waste and feed people in need.
 
-## React Compiler
+🚀 Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🧑‍🍳 Donate Food Easily: Users can share details about food items, including quantity, expiration date, and pickup location.
 
-## Expanding the ESLint configuration
+🙋‍♂️ Request Food: Visitors can request available food items by filling out a simple form with their location and contact information.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+📋 Request Management: Food owners can view all requests for their items and Accept or Reject them directly from the dashboard.
+
+🔐 Secure Authentication: Integrated Google sign-in for easy and safe login.
+
+📦 Dynamic Status Updates: Once a food request is accepted, its status automatically updates to “Donated” in real time.
+
+🧰 Tech Stack
+
+Frontend: React.js, Tailwind CSS
+
+Backend: Node.js, Express.js, MongoDB
+
+Authentication: Firebase Authentication
+
+Hosting: Vercel (Client) & Render / Vercel (Server)
