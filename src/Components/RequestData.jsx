@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 const RequestData = ({ req }) => {
 
-  const [accepted, setAccepted] = useState(false);
-  const [reject, setReject] = useState(true);
-  const [status, setStatus] = useState(req.status)
+  const [accepted, setAccepted] = useState(req.foodStatus);
+  console.log(accepted);
+  
+  const [foodStatus, setFoodStatus] = useState(req.status)
 
   const handleAcceptBtn = (id) => {
     console.log("clicked accepted btn", id);
@@ -20,7 +21,8 @@ const RequestData = ({ req }) => {
         console.log(data.matchedCount);
         setAccepted(!accepted);
         if(data.matchedCount){
-            setStatus('Accepted')
+            setFoodStatus('Donated')
+            setAccepted('Accepted')
         }
     })
   };
@@ -38,7 +40,8 @@ const RequestData = ({ req }) => {
         console.log(data.matchedCount);
         setAccepted(!accepted);
         if(data.matchedCount){
-            setStatus('Rejected')
+            setFoodStatus('Rejected')
+            setAccepted('Rejected')
         }
     })
   };
@@ -61,16 +64,17 @@ const RequestData = ({ req }) => {
       <td className="px-2 py-2">
         <span
           className={`px-2 py-1 rounded text-xs sm:text-sm ${
-            req.status === "pending"
+            foodStatus === "pending"
               ? "bg-yellow-200 text-yellow-800"
-              : req.status === "Accepted"
+              : foodStatus === "Accepted"
               ? "bg-green-200 text-green-800"
               : "bg-red-200 text-red-800"
           }`}
         >
-          {status}
+          {foodStatus}
         </span>
       </td>
+      <td className={`${accepted === "Accepted" ? 'text-green-500' : 'text-red-500'}`}> {accepted ? accepted : 'N/A'} </td>
       <td className="flex flex-col sm:flex-row gap-2 px-2 py-2">
         <button
           onClick={ ()=> handleAcceptBtn(req._id)}
@@ -79,9 +83,9 @@ const RequestData = ({ req }) => {
          Accept
         </button>
         <button onClick={() => handleRejectBtn(req._id)} className="btn btn-xs sm:btn-sm btn-error">
-            {
-                reject ? 'Reject' : 'Rejected'
-            }
+            
+                Reject
+            
             
             </button>
       </td>

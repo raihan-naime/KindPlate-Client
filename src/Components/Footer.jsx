@@ -11,7 +11,7 @@ const Footer = () => {
         {/* Left: Logo & Name */}
         <div className="flex items-center gap-2">
           <span className="text-2xl">🍽️</span>
-          <Link to="/" className="text-2xl font-bold text-primary">
+          <Link to="/" className="text-2xl font-bold text-[#3E3F29]">
             KindPlate
           </Link>
         </div>

@@ -6,7 +6,11 @@
   
 }
 
-@keyframes moveDot {
+.active{
+  @apply  bg-purple-100 text-purple-600
+}
+
+/* @keyframes moveDot {
   0%,
   100% {
     top: 10%;
@@ -24,8 +28,8 @@
     top: calc(100% - 30px);
     right: 10%;
   }
-}
+} */
 
-.animate-moveDot {
+/* .animate-moveDot {
   animation: moveDot 6s linear infinite;
-}
+} */
