@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 
 const Register = () => {
-  const { createUser, setUser, googleSignIn } = use(AuthContext);
+  const { createUser, setUser, googleSignIn, updateUserProfile } = use(AuthContext);
   const [error, setError] = useState('')
   const location = useLocation()
   const navigate = useNavigate();
@@ -34,12 +34,19 @@ const Register = () => {
       return;
     }
 
+    const profile = {
+      displayName: name,
+      photoURL: photoURL
+    }
     createUser(email, password)
       .then((user) => {
         const data = user.user;
-        setUser(data);
-        location.state ? navigate(location.state) : navigate('/')
+        updateUserProfile(profile)
+        .then(()=>{
+          setUser({...data, profile})
+        })
         toast.success("logged in");
+        location.state ? navigate(location.state) : navigate('/')
       })
       .catch((error) => {
         // const errorCode = error.code;
