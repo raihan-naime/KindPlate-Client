@@ -48,8 +48,11 @@ const ViewDetails = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setIsModalOpen(false);
+        const newRequests = [...request, data];
+        setRequest(newRequests)
+        
         // navigate("/availableFoods");
       });
   };
@@ -61,8 +64,6 @@ const ViewDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        
-        
         setRequest(data);
       });
   }, [id]);
