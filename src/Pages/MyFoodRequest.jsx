@@ -8,7 +8,9 @@ const MyFoodRequest = () => {
   // console.log(foodRequest);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-food-request?email=${user.email}`)
+    fetch(
+      `https://kind-server-plate.vercel.app/my-food-request?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setFoodRequest(data);
@@ -28,7 +30,7 @@ const MyFoodRequest = () => {
             <th>Location</th>
             <th>Reason</th>
             <th>Contact</th>
-            
+
             <th>Actions</th>
           </tr>
         </thead>
@@ -42,7 +44,12 @@ const MyFoodRequest = () => {
             </tr>
           ) : (
             foodRequest.map((req) => (
-              <FoodRequestTable key={req._id} setFoodRequest= {setFoodRequest} foodRequest={foodRequest} req={req}></FoodRequestTable>
+              <FoodRequestTable
+                key={req._id}
+                setFoodRequest={setFoodRequest}
+                foodRequest={foodRequest}
+                req={req}
+              ></FoodRequestTable>
             ))
           )}
         </tbody>

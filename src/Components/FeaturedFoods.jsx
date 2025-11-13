@@ -4,7 +4,7 @@ import { Link } from "react-router";
 
 const FeaturedFoods = ({ featuredFoods }) => {
   // useEffect(()=>{
-  //     fetch('http://localhost:3000/allfoods')
+  //     fetch('https://kind-server-plate.vercel.app/allfoods')
   //     .then(res => res.json)
   //     .then(data => console.log(data)
   //     )
@@ -22,7 +22,11 @@ const FeaturedFoods = ({ featuredFoods }) => {
         ))}
       </div>
       <div className="flex justify-center my-3">
-        <Link className="text-blue-700" to={'/availableFoods'}>Show All</Link>
+        <Link to="/availableFoods">
+          <button className="btn btn-outline text-green-500 px-6">
+            Show All
+          </button>
+        </Link>
       </div>
     </div>
   );

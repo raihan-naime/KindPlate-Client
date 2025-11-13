@@ -1,4 +1,4 @@
-import { use } from "react";
+import { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { toast } from "react-toastify";
@@ -6,6 +6,7 @@ import { FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 
 const Register = () => {
   const { createUser, setUser, googleSignIn } = use(AuthContext);
+  const [error, setError] = useState('')
   const location = useLocation()
   const navigate = useNavigate();
 
@@ -21,12 +22,15 @@ const Register = () => {
     // password validation
     if (!/[A-Z]/.test(password)) {
       toast.error('Password must contain at least one uppercase letter.')
+      setError('Password must contain at least one uppercase letter.')
       return;
     } else if (!/[a-z]/.test(password)) {
       toast.error("Password must contain at least one lowercase letter.")
+      setError("Password must contain at least one lowercase letter.")
       return ;
     } else if (password.length < 6) {
       toast.error("Password must be at least 6 characters long.")
+      setError("Password must be at least 6 characters long.")
       return;
     }
 
@@ -38,10 +42,10 @@ const Register = () => {
         toast.success("logged in");
       })
       .catch((error) => {
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        toast.error("error");
+        // console.log(errorCode, errorMessage);
+        toast.error(errorMessage);
       });
   };
 
@@ -53,17 +57,17 @@ const Register = () => {
         toast.success("Logged In");
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Error");
+        // console.log(error);
+        toast.error(error);
       });
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-5">
       <div className="max-w-md w-full bg-gray-900 text-gray-100 rounded-xl p-8  shadow-md">
-        <h2 className="text-2xl font-bold text-center text-primary mb-6">
-          Create an Account
-        </h2>
+        <h2 className="text-2xl font-bold text-center text-gray-100 mb-6">
+            Create an Account
+          </h2>
 
         <form onSubmit={handleCreateUser} className="space-y-4">
           <label
@@ -128,6 +132,7 @@ const Register = () => {
             <div className="h-px bg-gray-700 flex-1"></div>
           </div>
           
+          <p className="text-red-500">{error}</p>
 
     {/* Social buttons */}
               <div className="flex justify-center gap-3 mt-4">

@@ -1,49 +1,48 @@
 import React, { useState } from "react";
 
 const RequestData = ({ req }) => {
-
   const [accepted, setAccepted] = useState(req.foodStatus);
-  console.log(accepted);
-  
-  const [foodStatus, setFoodStatus] = useState(req.status)
+  // console.log(accepted);
+
+  const [foodStatus, setFoodStatus] = useState(req.status);
 
   const handleAcceptBtn = (id) => {
-    console.log("clicked accepted btn", id);
-    fetch(`http://localhost:3000/food-request-accept/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({status: 'Donated'})
+    // console.log("clicked accepted btn", id);
+    fetch(`https://kind-server-plate.vercel.app/food-request-accept/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "Donated" }),
     })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data.matchedCount);
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data.matchedCount);
         setAccepted(!accepted);
-        if(data.matchedCount){
-            setFoodStatus('Donated')
-            setAccepted('Accepted')
+        if (data.matchedCount) {
+          setFoodStatus("Donated");
+          setAccepted("Accepted");
         }
-    })
+      });
   };
   const handleRejectBtn = (id) => {
-    console.log("clicked accepted btn", id);
-    fetch(`http://localhost:3000/food-request-reject/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify({status: 'Rejected'})
+    // console.log("clicked accepted btn", id);
+    fetch(`https://kind-server-plate.vercel.app/food-request-reject/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "Rejected" }),
     })
-    .then(res => res.json())
-    .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data.matchedCount);
         setAccepted(!accepted);
-        if(data.matchedCount){
-            setFoodStatus('Rejected')
-            setAccepted('Rejected')
+        if (data.matchedCount) {
+          setFoodStatus("Rejected");
+          setAccepted("Rejected");
         }
-    })
+      });
   };
 
   return (
@@ -74,20 +73,27 @@ const RequestData = ({ req }) => {
           {foodStatus}
         </span>
       </td>
-      <td className={`${accepted === "Accepted" ? 'text-green-500' : 'text-red-500'}`}> {accepted ? accepted : 'N/A'} </td>
+      <td
+        className={`${
+          accepted === "Accepted" ? "text-green-500" : accepted === "Pending" ? "text-purple-500" : "text-red-500"
+        }`}
+      >
+        {" "}
+        {accepted ? accepted : "N/A"}{" "}
+      </td>
       <td className="flex flex-col sm:flex-row gap-2 px-2 py-2">
         <button
-          onClick={ ()=> handleAcceptBtn(req._id)}
+          onClick={() => handleAcceptBtn(req._id)}
           className="btn btn-xs sm:btn-sm btn-success"
         >
-         Accept
+          Accept
         </button>
-        <button onClick={() => handleRejectBtn(req._id)} className="btn btn-xs sm:btn-sm btn-error">
-            
-                Reject
-            
-            
-            </button>
+        <button
+          onClick={() => handleRejectBtn(req._id)}
+          className="btn btn-xs sm:btn-sm btn-error"
+        >
+          Reject
+        </button>
       </td>
     </tr>
   );

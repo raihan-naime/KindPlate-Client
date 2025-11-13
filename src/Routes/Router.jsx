@@ -13,54 +13,80 @@ import UpdateFood from "../Pages/UpdateFood";
 import ErrorPage from "../Pages/ErrorPage";
 
 const router = createBrowserRouter([
-    {
-        path: '/',
-        Component: RootLayout,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                index: true,
-                loader: ()=> fetch('http://localhost:3000/featuredFoods'),
-                Component: Home
-            },
-            {
-                path: '/availableFoods',
-                loader: ()=> fetch('http://localhost:3000/allfoods'),
-                Component: AvailableFoods
-            },
-            {
-                path: '/login',
-                Component: Login
-            },
-            {
-                path: '/register',
-                Component: Register
-            },
-            {
-                path: '/add-food',
-                element: <PrivateRouter><AddFood></AddFood></PrivateRouter>
-            },
-            {
-                path: '/manage-my-foods',
-                element: <PrivateRouter><ManageMyFoods></ManageMyFoods></PrivateRouter>
-            },
-            {
-                path: '/my-food-request',
-                element: <PrivateRouter><MyFoodRequest></MyFoodRequest></PrivateRouter>
-            },
-            {
-                path: '/food/:id',
-                loader: ({params}) => fetch(`http://localhost:3000/food/${params.id}`),
-                element: <PrivateRouter> <ViewDetails></ViewDetails> </PrivateRouter>
-            },
-            {
-                path: '/update-food/:id',
-                loader: ({params}) => fetch(`http://localhost:3000/update-food/${params.id}`),
-                element: <PrivateRouter> <UpdateFood></UpdateFood> </PrivateRouter>
+  {
+    path: "/",
+    Component: RootLayout,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        index: true,
+        loader: () =>
+          fetch("https://kind-server-plate.vercel.app/featuredFoods"),
+        Component: Home,
+      },
+      {
+        path: "/availableFoods",
+        loader: () => fetch("https://kind-server-plate.vercel.app/allfoods"),
+        Component: AvailableFoods,
+      },
+      {
+        path: "/login",
+        Component: Login,
+      },
+      {
+        path: "/register",
+        Component: Register,
+      },
+      {
+        path: "/add-food",
+        element: (
+          <PrivateRouter>
+            <AddFood></AddFood>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/manage-my-foods",
+        element: (
+          <PrivateRouter>
+            <ManageMyFoods></ManageMyFoods>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/my-food-request",
+        element: (
+          <PrivateRouter>
+            <MyFoodRequest></MyFoodRequest>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/food/:id",
+        loader: ({ params }) =>
+          fetch(`https://kind-server-plate.vercel.app/food/${params.id}`),
+        element: (
+          <PrivateRouter>
+            {" "}
+            <ViewDetails></ViewDetails>{" "}
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/update-food/:id",
+        loader: ({ params }) =>
+          fetch(
+            `https://kind-server-plate.vercel.app/update-food/${params.id}`
+          ),
+        element: (
+          <PrivateRouter>
+            {" "}
+            <UpdateFood></UpdateFood>{" "}
+          </PrivateRouter>
+        ),
+      },
+    ],
+  },
+]);
 
-            }
-        ]
-    }
-])
-
-export default router
+export default router;

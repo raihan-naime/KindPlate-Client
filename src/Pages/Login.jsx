@@ -26,8 +26,8 @@ const Login = () => {
         toast.success("Logged in");
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Error");
+        // console.log(error);
+        toast.error(error.message);
       });
   };
 
@@ -39,8 +39,8 @@ const Login = () => {
         toast.success("Logged In");
       })
       .catch((error) => {
-        console.log(error);
-        toast.error("Error");
+        // console.log(error);
+        toast.error(error.message);
       });
   };
 

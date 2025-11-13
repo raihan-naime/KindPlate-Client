@@ -27,7 +27,7 @@ const Navbar = () => {
         <NavLink to="/availableFoods">Available Foods</NavLink>
       </li>
 
-      {user && (
+      {/* {user && (
         <>
           <li>
             <NavLink
@@ -54,7 +54,7 @@ const Navbar = () => {
             </NavLink>
           </li>
         </>
-      )}
+      )} */}
     </>
   );
 
@@ -91,7 +91,8 @@ const Navbar = () => {
           to="/"
           className="text-2xl font-bold text-[#3E3F29] flex items-center gap-2"
         >
-          🍽️ KindPlate
+          <span className="text-2xl">🍽️</span>
+        KindPlate
         </Link>
       </div>
 

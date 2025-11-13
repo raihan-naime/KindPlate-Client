@@ -13,17 +13,16 @@ const FoodRequestTable = ({ req, setFoodRequest, foodRequest }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("now delete");
-        fetch(`http://localhost:3000/delete-request/${id}`, {
+        fetch(`https://kind-server-plate.vercel.app/delete-request/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data.deletedCount);
-            
             if (data.deletedCount) {
-                const newRequestList = foodRequest.filter(request => request._id !== id);
-                setFoodRequest(newRequestList)
+              const newRequestList = foodRequest.filter(
+                (request) => request._id !== id
+              );
+              setFoodRequest(newRequestList);
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",

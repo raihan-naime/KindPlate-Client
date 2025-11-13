@@ -11,7 +11,9 @@ const ManageMyFoods = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/manage-my-foods?email=${user.email}`)
+    fetch(
+      `https://kind-server-plate.vercel.app/manage-my-foods?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyFoods(data);
@@ -28,7 +30,6 @@ const ManageMyFoods = () => {
       <div className="h-[70vh] flex justify-center items-center">
         <Loader></Loader>
       </div>
-      
     );
   }
   //   console.log(myFoods);
@@ -45,12 +46,12 @@ const ManageMyFoods = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/delete-food/${id}`, {
+        fetch(`https://kind-server-plate.vercel.app/delete-food/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             const newFoodItems = myFoods.filter((food) => food._id !== id);
             setMyFoods(newFoodItems);
             Swal.fire({

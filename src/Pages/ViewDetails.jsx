@@ -24,7 +24,7 @@ const ViewDetails = () => {
     const location = e.target.location.value;
     const reason = e.target.reason.value;
     const contact = e.target.contact.value;
-    const foodStatus = 'Pending';
+    const foodStatus = "Pending";
     const foodRequest = {
       userName,
       userEmail,
@@ -34,12 +34,12 @@ const ViewDetails = () => {
       location,
       reason,
       contact,
-      foodStatus
+      foodStatus,
     };
     // console.log(foodRequest);
     // /food-request
 
-    fetch("http://localhost:3000/food-request", {
+    fetch("https://kind-server-plate.vercel.app/food-request", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -57,9 +57,12 @@ const ViewDetails = () => {
   // /food-request/:foodId
 
   useEffect(() => {
-    fetch(`http://localhost:3000/food-request/${id}`)
+    fetch(`https://kind-server-plate.vercel.app/food-request/${id}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+        
+        
         setRequest(data);
       });
   }, [id]);

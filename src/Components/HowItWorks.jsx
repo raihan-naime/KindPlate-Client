@@ -28,6 +28,7 @@ const HowItWorks = () => {
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-10">
         How It Works
       </h2>
+      <p className="text-center mb-4 mx-auto text-gray-500 max-w-200 ">At KindPlate, sharing food is simple and meaningful.. Together, we reduce food waste, support communities, and make a positive impact—one plate at a time.</p>
 
       {/* Card Container */}
       <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  gap-10">

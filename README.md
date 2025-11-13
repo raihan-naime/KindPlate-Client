@@ -1,6 +1,6 @@
 🍲 Food Share — Donate & Request Food Easily
 
-Live Site URL: https://your-live-site-url.vercel.app
+Live Site URL: https://kindplate-fe65e.firebaseapp.com/
 
 🌟 About the Project
 
