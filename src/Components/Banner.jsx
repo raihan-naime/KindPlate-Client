@@ -1,7 +1,17 @@
 import React from "react";
 import { Link } from "react-router";
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Don't forget the CSS!
 
 const Banner = () => {
+  // In your Homepage component
+useEffect(() => {
+  AOS.init({
+    duration: 1000, // Optional: animation duration
+    once: true, // Optional: only animate once
+  });
+}, []);
   return (
 
     <section>
@@ -18,7 +28,7 @@ const Banner = () => {
   <div className="hero-overlay"></div>
   <div className="hero-content text-neutral-content text-center">
     <div className="max-w-md">
-      <h1 className="mb-5 text-5xl font-bold">Share Food, Spread Kindness </h1>
+      <h1 data-aos="fade-up" className="mb-5 text-5xl font-bold">Share Food, Spread Kindness </h1>
       <p className="mb-5">
         PlateShare connects people who have extra food with those who need it. Join us in reducing food waste and helping your community today.
       </p>

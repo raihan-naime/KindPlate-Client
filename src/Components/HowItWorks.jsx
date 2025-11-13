@@ -1,6 +1,7 @@
 import React from "react";
 import { Handshake, Search, Upload, ArrowRight } from "lucide-react";
 
+
 const steps = [
   {
     title: "Post Food",
